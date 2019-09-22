@@ -18,4 +18,4 @@ gsettings set org.gnome.desktop.screensaver picture-uri "file://$PIC"
 if [$cronortimed -eq "timed"] then
 sleep $time_interval
 fi
-done
+done &
