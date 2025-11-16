@@ -1,0 +1,29 @@
+name: Deploy to Node Server
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+    inputs:
+      action:
+        description: "deploy | rebuild"
+        required: false
+        default: "deploy"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger remote deployment
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          envs: GIT_REMOTE_URL,REBUILD
+          script: |
+            export GIT_REMOTE_URL="${{ secrets.GIT_REMOTE_URL }}"
+            if [ "${{ inputs.action }}" = "rebuild" ]; then
+              export REBUILD=1
+            fi
+            sudo /usr/local/bin/deploy_nodeweb.sh
