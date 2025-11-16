@@ -9,6 +9,9 @@ Works with Gnome 3 - tested on Ubuntu - up to 24.04
 - Configurable time intervals for timed mode
 - Command-line options for customization
 
+## Future roadmap
+- Testing on other linux operating systems
+
 ## Usage
 ```bash
 ./background_changer.sh [OPTIONS]
