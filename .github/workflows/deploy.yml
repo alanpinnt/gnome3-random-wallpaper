@@ -20,6 +20,7 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
+          passphrase: ${{ secrets.SSH_KEY_PASSPHRASE }}
           envs: GIT_REMOTE_URL,REBUILD
           script: |
             export GIT_REMOTE_URL="${{ secrets.GIT_REMOTE_URL }}"
