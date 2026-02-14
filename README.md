@@ -10,8 +10,6 @@ Works with Gnome 3 - tested on Ubuntu - up to 24.04
 - Command-line options for customization
 
 ## Future roadmap
-- Testing on other linux operating systems
-- test
 
 ## Usage
 ```bash
