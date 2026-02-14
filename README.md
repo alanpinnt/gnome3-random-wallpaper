@@ -4,7 +4,7 @@ Simple wallpaper and lock screen changer.
 Works with Gnome 3 - tested on Ubuntu - up to 24.04 
 
 ## Features
-- Automatically defaults to the current user's Pictures directory (`~/Pictures`)
+- Configurable wallpaper directory via `WALLPAPER_DIR` variable or `-d` flag
 - Two modes: cron (run once) or timed (continuous loop)
 - Configurable time intervals for timed mode
 - Command-line options for customization
@@ -13,15 +13,15 @@ Works with Gnome 3 - tested on Ubuntu - up to 24.04
 ```bash
 ./background_changer.sh [OPTIONS]
 
-PTIONS:
+OPTIONS:
     -d, --dir DIR          Directory containing wallpaper images (default: WALLPAPER_DIR variable)
     -m, --mode MODE        Mode: 'cron' (run once) or 'timed' (continuous loop) (default: cron)
     -t, --interval TIME    Time interval for timed mode (e.g., 30, 5m) (default: 30)
     -h, --help             Show this help message
 
 EXAMPLES:
-    $0 --dir ~/Pictures --mode timed --interval 2m
-    $0 -d /home/user/wallpapers -m cron
+    ./background_changer.sh --dir ~/Pictures --mode timed --interval 2m
+    ./background_changer.sh -d /home/user/wallpapers -m cron
 
 ENVIRONMENT VARIABLES:
     WALLPAPER_DIR         Override default wallpaper directory
@@ -32,10 +32,8 @@ ENVIRONMENT VARIABLES:
 ## Install instructions:
 1. Clone or download the background_changer.sh file
 2. Make it executable: `chmod +x background_changer.sh`
-3. (Optional) Place your wallpaper images in `~/Pictures` or specify a different directory with `-d`
+3. Edit the `WALLPAPER_DIR` variable in the script to point to your wallpaper folder, or use the `-d` flag at runtime
 4. Run the script with your preferred mode and interval
-
-The script now automatically uses the current user's Pictures directory, so no manual editing is required!
 
 ### Major Script Improvements
 - **Added command-line argument parsing**: Script now accepts `-d/--dir`, `-m/--mode`, `-t/--interval`, and `-h/--help` options
