@@ -1,6 +1,5 @@
 #!/bin/bash
-# Author: Alan Pinnt
-# Github: https://github.com/alanpinnt/gnome3-random-wallpaper/
+#
 # background_changer.sh - GNOME3 Random Wallpaper Changer
 #
 # DESCRIPTION:
