@@ -1,6 +1,65 @@
 #!/bin/bash
+# Author: Alan Pinnt
+# Github: https://github.com/alanpinnt/gnome3-random-wallpaper/
+# background_changer.sh - GNOME3 Random Wallpaper Changer
+#
+# DESCRIPTION:
+#   Randomly selects and sets wallpaper images from a specified directory.
+#   Works with GNOME desktop environment and supports both desktop background
+#   and lock screen/screensaver images. Automatically handles dark mode.
+#
+# REQUIREMENTS:
+#   - GNOME desktop environment (uses gsettings)
+#   - Bash 4.0+
+#   - Images in supported formats: jpg, jpeg, png, bmp, gif, webp
+#
+# MODES:
+#   cron   - Changes wallpaper once and exits (default)
+#            Use this mode when running from cron or systemd timer
+#
+#   timed  - Runs continuously, changing wallpaper at specified intervals
+#            Use this mode when running manually or as a background service
+#
+# USAGE:
+#   ./background_changer.sh                     # Run once with defaults
+#   ./background_changer.sh -m timed -t 5m      # Change every 5 minutes
+#   ./background_changer.sh -d ~/Wallpapers     # Use a different directory
+#   ./background_changer.sh --help              # Show all options
+#
+# COMMAND-LINE OPTIONS:
+#   -d, --dir DIR        Wallpaper directory (overrides WALLPAPER_DIR below)
+#   -m, --mode MODE      'cron' (run once) or 'timed' (continuous loop)
+#   -t, --interval TIME  Interval for timed mode (e.g., 30, 5m, 10m)
+#   -h, --help           Show help message
+#
+# CRON SETUP:
+#   To change wallpaper every 30 minutes, add to crontab (crontab -e):
+#     */30 * * * * /path/to/background_changer.sh
+#
+#   Note: The script automatically handles DBUS session detection for cron.
+#
+# SYSTEMD USER SERVICE (alternative to cron):
+#   Create ~/.config/systemd/user/wallpaper.service:
+#     [Unit]
+#     Description=Wallpaper Changer
+#
+#     [Service]
+#     ExecStart=/path/to/background_changer.sh -m timed -t 30m
+#     Restart=always
+#
+#     [Install]
+#     WantedBy=default.target
+#
+#   Then run: systemctl --user enable --now wallpaper.service
+#
 
 set -e
+
+# ============================================================
+# USER CONFIGURATION - Set your wallpaper folder here
+# ============================================================
+WALLPAPER_DIR="$HOME/Pictures"
+# ============================================================
 
 usage() {
     cat << EOF
@@ -9,7 +68,7 @@ Usage: $0 [OPTIONS]
 A GNOME3 random wallpaper changer that cycles through images in a directory.
 
 OPTIONS:
-    -d, --dir DIR          Directory containing wallpaper images (default: ~/Pictures)
+    -d, --dir DIR          Directory containing wallpaper images (default: WALLPAPER_DIR variable)
     -m, --mode MODE        Mode: 'cron' (run once) or 'timed' (continuous loop) (default: cron)
     -t, --interval TIME    Time interval for timed mode (e.g., 30, 5m) (default: 30)
     -h, --help             Show this help message
@@ -72,7 +131,7 @@ parse_time_interval() {
     fi
 }
 
-DIR="${WALLPAPER_DIR:-$HOME/Pictures}"
+DIR="${DIR:-$WALLPAPER_DIR}"
 MODE="${MODE:-cron}"
 TIME_INTERVAL="${TIME_INTERVAL:-30}"
 
