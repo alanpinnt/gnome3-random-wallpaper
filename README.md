@@ -8,9 +8,7 @@ Works with Gnome 3 - tested on Ubuntu - up to 24.04
 - Two modes: cron (run once) or timed (continuous loop)
 - Configurable time intervals for timed mode
 - Command-line options for customization
-
-## Future roadmap
-
+  
 ## Usage
 ```bash
 ./background_changer.sh [OPTIONS]
@@ -34,8 +32,6 @@ EXAMPLES:
 
 The script now automatically uses the current user's Pictures directory, so no manual editing is required!
 
-## Recent Changes
-
 ### Major Script Improvements
 - **Added command-line argument parsing**: Script now accepts `-d/--dir`, `-m/--mode`, `-t/--interval`, and `-h/--help` options
 - **Two operation modes**: 
@@ -49,3 +45,5 @@ The script now automatically uses the current user's Pictures directory, so no m
 - **Image format support**: Supports jpg, jpeg, png, bmp, gif, and webp formats
 - **Dark mode support**: Automatically sets wallpaper for both light and dark themes when available
 - **Robust file validation**: Checks for actual image files rather than just directory contents 
+
+## Future roadmap
