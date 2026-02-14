@@ -13,15 +13,20 @@ Works with Gnome 3 - tested on Ubuntu - up to 24.04
 ```bash
 ./background_changer.sh [OPTIONS]
 
-OPTIONS:
-    -d, --dir DIR          Directory containing wallpaper images (default: ~/Pictures)
+PTIONS:
+    -d, --dir DIR          Directory containing wallpaper images (default: WALLPAPER_DIR variable)
     -m, --mode MODE        Mode: 'cron' (run once) or 'timed' (continuous loop) (default: cron)
     -t, --interval TIME    Time interval for timed mode (e.g., 30, 5m) (default: 30)
     -h, --help             Show this help message
 
 EXAMPLES:
-    ./background_changer.sh --dir ~/Pictures --mode timed --interval 2m
-    ./background_changer.sh -d /home/user/wallpapers -m cron
+    $0 --dir ~/Pictures --mode timed --interval 2m
+    $0 -d /home/user/wallpapers -m cron
+
+ENVIRONMENT VARIABLES:
+    WALLPAPER_DIR         Override default wallpaper directory
+    MODE                  Override default mode (cron/timed)
+    TIME_INTERVAL         Override default time interval
 ```
 
 ## Install instructions:
